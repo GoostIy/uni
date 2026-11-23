@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prestamos>
+    <prestamo>
+        <id>1</id>
+        <estudiante>María Torres</estudiante>
+        <cedula>0201234567</cedula>
+        <libro>Cien años de soledad</libro>
+        <categoria>Literatura</categoria>
+        <fecha_prestamo>2026-11-03</fecha_prestamo>
+        <fecha_limite>2026-11-18</fecha_limite>
+        <estado>devuelto</estado>
+    </prestamo>
+    <prestamo>
+        <id>2</id>
+        <estudiante>Carlos Guamán</estudiante>
+        <cedula>0209876543</cedula>
+        <libro>Breve historia del tiempo</libro>
+        <categoria>Ciencia</categoria>
+        <fecha_prestamo>2026-11-20</fecha_prestamo>
+        <fecha_limite>2026-12-04</fecha_limite>
+        <estado>devuelto</estado>
+    </prestamo>
+    <prestamo>
+        <id>4</id>
+        <estudiante>Juan Torres</estudiante>
+        <cedula>1702154852</cedula>
+        <libro>Cien años de soledad</libro>
+        <categoria>Literatura</categoria>
+        <fecha_prestamo>2026-11-23</fecha_prestamo>
+        <fecha_limite>2026-11-30</fecha_limite>
+        <estado>devuelto</estado>
+    </prestamo>
+</prestamos>

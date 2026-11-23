@@ -1,0 +1,268 @@
+/* ==========================================================
+   estilos.css
+   Diseño minimalista: fondo claro, tarjetas blancas con borde
+   fino, botones oscuros y color solo en las etiquetas de estado.
+   ========================================================== */
+
+
+/* ---------- Colores que se repiten (variables) ---------- */
+:root {
+    --fondo: #f6f6f3;       /* fondo de la página */
+    --tarjeta: #ffffff;     /* fondo de las tarjetas */
+    --texto: #1c1c1c;       /* texto principal y botones */
+    --suave: #6b6b6b;       /* textos secundarios */
+    --borde: #e3e3de;       /* líneas y bordes */
+}
+
+
+/* ---------- General ---------- */
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    color: var(--texto);
+    background: var(--fondo);
+}
+
+/* Ancho máximo del contenido y centrado */
+.pagina {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Título y subtítulo de arriba */
+.encabezado h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.encabezado p {
+    margin: 6px 0 28px;
+    color: var(--suave);
+}
+
+/* Tarjetas blancas (formulario y lista) */
+.tarjeta {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.tarjeta h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+/* ---------- Formulario ---------- */
+
+/* Dos campos por fila; en pantallas angostas pasa a uno */
+.campos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px 20px;
+    margin-top: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+input,
+select {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    background: white;
+    font: inherit;
+    color: var(--texto);
+    box-sizing: border-box;   /* el padding no agranda la caja */
+}
+
+/* Campo que se está usando: borde oscuro */
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--texto);
+}
+
+/* Campos de solo lectura (al editar) */
+input[readonly] {
+    background: var(--fondo);
+    color: var(--suave);
+}
+
+/* Fila de botones debajo del formulario */
+.botones {
+    margin-top: 22px;
+    display: flex;
+    gap: 10px;
+}
+
+
+/* ---------- Botones ---------- */
+
+/* Botón principal: oscuro */
+input[type=submit],
+.boton {
+    width: auto;
+    height: 40px;
+    padding: 0 20px;
+    border: 1px solid var(--texto);
+    border-radius: 8px;
+    background: var(--texto);
+    color: white;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Botón secundario: blanco con borde */
+.boton.claro {
+    background: white;
+    color: var(--texto);
+    border-color: var(--borde);
+}
+
+/* Botones pequeños de la tabla */
+.boton-chico {
+    padding: 5px 10px;
+    margin-left: 4px;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    background: white;
+    color: var(--texto);
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.boton-chico:hover {
+    background: var(--fondo);
+}
+
+/* Eliminar en rojo */
+.boton-chico.peligro {
+    color: #c81e1e;
+}
+
+input[type=submit]:hover,
+.boton:hover {
+    opacity: 0.85;
+}
+
+
+/* ---------- Mensaje de resultado ---------- */
+
+.mensaje {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.mensaje.ok {
+    background: #e6f6ec;
+    color: #127a3d;
+}
+
+.mensaje.error {
+    background: #fde8e8;
+    color: #c81e1e;
+}
+
+
+/* ---------- Lista de préstamos ---------- */
+
+/* Título "Préstamos" a la izquierda y filtros a la derecha */
+.barra {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.filtros {
+    display: flex;
+    gap: 10px;
+}
+
+.filtros select {
+    width: auto;
+    height: 36px;
+}
+
+/* La tabla puede moverse de lado en pantallas pequeñas */
+.tabla-contenedor {
+    overflow-x: auto;
+    margin-top: 16px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;   /* une los bordes de las celdas */
+}
+
+th {
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--suave);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--borde);
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid var(--borde);
+    vertical-align: top;
+}
+
+/* Al pasar el mouse por una fila se resalta un poco */
+tbody tr:hover {
+    background: #fafaf8;
+}
+
+/* Texto pequeño debajo del nombre y del libro (cédula y categoría) */
+td small {
+    color: var(--suave);
+}
+
+.acciones {
+    white-space: nowrap;   /* los botones no se parten en varias líneas */
+    text-align: right;
+}
+
+.vacio {
+    text-align: center;
+    color: var(--suave);
+}
+
+
+/* ---------- Etiqueta de estado (color según el estado) ---------- */
+
+.estado {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;   /* forma de píldora */
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.prestado { background: #e8f0fe; color: #1a56db; }   /* azul */
+.vencido  { background: #fde8e8; color: #c81e1e; }   /* rojo */
+.devuelto { background: #e6f6ec; color: #127a3d; }   /* verde */

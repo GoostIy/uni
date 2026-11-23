@@ -1,0 +1,129 @@
+<!-- ==========================================================
+     index.html
+     Única página del sistema:
+       1. Formulario para registrar (o editar) un préstamo
+       2. Lista de préstamos con filtros
+     Los datos se leen del archivo xml/prestamos.xml con AJAX
+     (js/prestamos.js), así que la página nunca se recarga.
+     ========================================================== -->
+<html>
+
+<head>
+    <title>Biblioteca · Préstamos</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script src="js/validaciones.js"></script>
+    <script src="js/prestamos.js"></script>
+</head>
+
+<!-- onload: al abrir la página se carga la lista de préstamos -->
+<body onload="cargarPrestamos()">
+    <div class="pagina">
+
+        <!-- Título de la página -->
+        <header class="encabezado">
+            <h1>Préstamos de libros</h1>
+            <p>Biblioteca · registro y control de devoluciones</p>
+        </header>
+
+        <!-- Aquí prestamos.js escribe el resultado de cada acción -->
+        <div id="mensaje"></div>
+
+        <!-- ===== 1. Formulario ===== -->
+        <section class="tarjeta">
+            <h2 id="tituloFormulario">Registrar préstamo</h2>
+
+            <!-- onsubmit llama a guardarPrestamo(); el "return" evita que la página se recargue -->
+            <form id="formulario" onsubmit="return guardarPrestamo()">
+
+                <!-- id oculto: vacío = registrar; con número = editar ese préstamo -->
+                <input type="hidden" id="id" />
+
+                <div class="campos">
+                    <div>
+                        <label for="estudiante">Estudiante</label>
+                        <!-- oninput: mientras escribe, borra lo que no sea letra -->
+                        <input type="text" id="estudiante" maxlength="80" placeholder="María Torres" oninput="soloLetras(this)" />
+                    </div>
+                    <div>
+                        <label for="cedula">Cédula</label>
+                        <!-- oninput: mientras escribe, borra lo que no sea número y deja máximo 10 -->
+                        <input type="text" id="cedula" placeholder="0201234567" inputmode="numeric" oninput="soloNumeros(this)" />
+                    </div>
+                    <div>
+                        <label for="libro">Libro</label>
+                        <input type="text" id="libro" maxlength="120" placeholder="Cien años de soledad" />
+                    </div>
+                    <div>
+                        <label for="categoria">Categoría</label>
+                        <select id="categoria">
+                            <option value="">Seleccione</option>
+                            <option value="Ciencia">Ciencia</option>
+                            <option value="Literatura">Literatura</option>
+                            <option value="Tecnología">Tecnología</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="fecha_prestamo">Fecha del préstamo</label>
+                        <input type="date" id="fecha_prestamo" />
+                    </div>
+                    <div>
+                        <label for="fecha_limite">Fecha límite</label>
+                        <input type="date" id="fecha_limite" />
+                    </div>
+                </div>
+
+                <div class="botones">
+                    <input type="submit" id="botonGuardar" value="Registrar" />
+                    <!-- solo se ve cuando se está editando -->
+                    <button type="button" id="botonCancelar" class="boton claro" onclick="limpiarFormulario()" hidden>Cancelar</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- ===== 2. Lista de préstamos ===== -->
+        <section class="tarjeta">
+            <div class="barra">
+                <h2>Préstamos</h2>
+
+                <!-- onchange: al cambiar un filtro se vuelve a armar la tabla (sin recargar) -->
+                <div class="filtros">
+                    <select id="filtroEstado" onchange="cargarPrestamos()">
+                        <option value="">Todos los estados</option>
+                        <option value="prestado">Prestado</option>
+                        <option value="vencido">Vencido</option>
+                        <option value="devuelto">Devuelto</option>
+                    </select>
+                    <select id="filtroCategoria" onchange="cargarPrestamos()">
+                        <option value="">Todas las categorías</option>
+                        <option value="Ciencia">Ciencia</option>
+                        <option value="Literatura">Literatura</option>
+                        <option value="Tecnología">Tecnología</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Estudiante</th>
+                            <th>Libro</th>
+                            <th>Préstamo</th>
+                            <th>Fecha límite</th>
+                            <th>Estado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <!-- prestamos.js llena este tbody con los datos del XML -->
+                    <tbody id="tablaPrestamos"></tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+</body>
+
+</html>
